@@ -4,8 +4,6 @@ import com.example.bookrental.Backend.model.dto.BookDto;
 import com.example.bookrental.Backend.model.entity.Author;
 import com.example.bookrental.Backend.model.entity.Book;
 import com.example.bookrental.Backend.repository.BookRepository;
-import com.example.bookrental.Backend.service.IAuthorService;
-import com.example.bookrental.Backend.service.IBookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,6 +59,12 @@ public class BookService implements IBookService {
         Book b = new Book();
         return saveBook(book, b);
     }
+
+    @Override
+    public List<Book> getBooksByAuthorId(Long id) {
+        return bookRepository.findByAuthorId(id);
+    }
+
     private Book saveBook(BookDto bookDto, Book book) {
         Author author = authorService.getAuthorById(bookDto.getAuthor());
 

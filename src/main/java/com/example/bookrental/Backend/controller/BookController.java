@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/books")
 public class BookController {
 
-    private IBookService bookService;
+    private final IBookService bookService;
 
     public BookController(IBookService bookService) {
         this.bookService = bookService;
@@ -28,7 +28,7 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/addBook")
+    @PostMapping("/add")
     public ResponseEntity<Book> addBook(@RequestBody BookDto book) {
         Book newBook = bookService.addBook(book);
 
@@ -39,7 +39,7 @@ public class BookController {
         }
     }
 
-    @DeleteMapping("/deleteBook/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
         Book book = bookService.getBookById(id);
 
@@ -51,7 +51,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("/editBook/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Book> editBook(@PathVariable Long id, @RequestBody BookDto book) {
         Book newBook = bookService.editBook(id, book);
 
@@ -62,7 +62,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("/markBook/{id}")
+    @PutMapping("/mark/{id}")
     public ResponseEntity<Book> markBookAsTaken(@PathVariable Long id) {
         Book book = bookService.getBookById(id);
         if (book == null) {
