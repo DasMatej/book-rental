@@ -4,6 +4,8 @@ import com.example.bookrental.Backend.model.dto.AuthorDto;
 import com.example.bookrental.Backend.model.entity.Author;
 import com.example.bookrental.Backend.model.entity.Country;
 import com.example.bookrental.Backend.repository.AuthorRepository;
+import com.example.bookrental.Backend.service.IAuthorService;
+import com.example.bookrental.Backend.service.ICountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

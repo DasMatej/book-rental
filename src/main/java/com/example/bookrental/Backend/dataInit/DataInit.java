@@ -3,6 +3,7 @@ package com.example.bookrental.Backend.dataInit;
 import com.example.bookrental.Backend.model.entity.Author;
 import com.example.bookrental.Backend.model.entity.Book;
 import com.example.bookrental.Backend.model.entity.Country;
+import com.example.bookrental.Backend.model.enums.BookCategory;
 import com.example.bookrental.Backend.repository.AuthorRepository;
 import com.example.bookrental.Backend.repository.BookRepository;
 import com.example.bookrental.Backend.repository.CountryRepository;
@@ -26,8 +27,7 @@ public class DataInit {
         if (countryRepository.count() != 0 || authorRepository.count() != 0 || bookRepository.count() != 0) {
             return;
         }
-
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 10; i++) {
             createFake(i);
         }
     }
@@ -46,6 +46,7 @@ public class DataInit {
 
         Book b = new Book();
         b.setName(String.format("Name %d", i));
+        b.setCategory(BookCategory.values()[i % BookCategory.values().length]);
         b.setAuthor(a);
         b.setAvailableCopies(i);
         bookRepository.save(b);

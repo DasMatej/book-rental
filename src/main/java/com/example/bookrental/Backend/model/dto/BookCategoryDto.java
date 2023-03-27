@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class BookCategoryDto {
     private String name;
-
     private String continent;
 }

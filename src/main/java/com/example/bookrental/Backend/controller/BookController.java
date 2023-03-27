@@ -3,7 +3,6 @@ package com.example.bookrental.Backend.controller;
 import com.example.bookrental.Backend.model.dto.BookDto;
 import com.example.bookrental.Backend.model.entity.Book;
 import com.example.bookrental.Backend.service.IBookService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,18 +39,37 @@ public class BookController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
+    @DeleteMapping("/deleteBook/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
+        Book book = bookService.getBookById(id);
+
+        if (book == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            bookService.deleteBook(id);
+            return ResponseEntity.ok(book);
+        }
     }
 
-    @PutMapping("/{id}/rentBook")
-    public Book rentBook(@PathVariable Long id) {
-        return bookService.rentBook(id);
+    @PutMapping("/editBook/{id}")
+    public ResponseEntity<Book> editBook(@PathVariable Long id, @RequestBody BookDto book) {
+        Book newBook = bookService.editBook(id, book);
+
+        if (newBook == null) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(newBook);
+        }
     }
 
-    @PutMapping("/{id}/returnBook")
-    public Book returnBook(@PathVariable Long id) {
-        return bookService.returnBook(id);
+    @PutMapping("/markBook/{id}")
+    public ResponseEntity<Book> markBookAsTaken(@PathVariable Long id) {
+        Book book = bookService.getBookById(id);
+        if (book == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            bookService.markBookAsTaken(id);
+            return ResponseEntity.ok(book);
+        }
     }
 }

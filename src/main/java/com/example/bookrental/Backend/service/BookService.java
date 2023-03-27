@@ -4,19 +4,21 @@ import com.example.bookrental.Backend.model.dto.BookDto;
 import com.example.bookrental.Backend.model.entity.Author;
 import com.example.bookrental.Backend.model.entity.Book;
 import com.example.bookrental.Backend.repository.BookRepository;
+import com.example.bookrental.Backend.service.IAuthorService;
+import com.example.bookrental.Backend.service.IBookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BookService implements IBookService{
+public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
-    //private final IAuthorService authorService;
+    private final IAuthorService authorService;
 
-    public BookService(BookRepository bookRepository) {//,IAuthorService authorService
+    public BookService(BookRepository bookRepository,IAuthorService authorService) {
         this.bookRepository = bookRepository;
-        //this.authorService = authorService;
+        this.authorService = authorService;
     }
 
     @Override
@@ -30,50 +32,45 @@ public class BookService implements IBookService{
     }
 
     @Override
-    public Book saveBook(Book book) {
-        return null;
-    }
-
-    @Override
     public void deleteBook(Long id) {
-
+        bookRepository.deleteById(id);
     }
 
     @Override
-    public Book rentBook(Long id) {
-        return null;
+    public Book editBook(Long id, BookDto bookDto) {
+        Book book = bookRepository.findById(id).orElse(null);
+        if (book == null) {
+            return null;
+        }
+
+        return saveBook(bookDto, book);
     }
 
     @Override
-    public Book returnBook(Long id) {
-        return null;
+    public void markBookAsTaken(Long id) {
+        Book book = bookRepository.findById(id).orElse(null);
+        if (book == null) {
+            return;
+        }
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+        bookRepository.save(book);
     }
 
     @Override
     public Book addBook(BookDto book) {
-        return null;
+        Book b = new Book();
+        return saveBook(book, b);
     }
-//    @Override
-//    public Book getBookById(Long id) {
-//        return bookRepository.findById(id).orElse(null);
-//    }
-    ////@Override
-   // public Book addBook(BookDto book) {
-    //    Book b = new Book();
-     //   return saveBook(book, b);
-    //}
-    //private Book saveBook(BookDto book, Book b) {
-    //    Author a = authorService.getAuthorById(book.getAuthor());
+    private Book saveBook(BookDto bookDto, Book book) {
+        Author author = authorService.getAuthorById(bookDto.getAuthor());
 
-    //    if (a == null) {
-     //       return null;
-    //    }
-
-     //   b.setName(book.getName());
-     //   b.setCategory(book.getCategory());
-    //    b.setAuthor(a);
-     //   b.setAvailableCopies(book.getAvailableCopies());
-//
-     //   return bookRepository.save(b);
-    //}
+        if (author == null) {
+            return null;
+        }
+        book.setName(bookDto.getName());
+        book.setCategory(bookDto.getCategory());
+        book.setAuthor(author);
+        book.setAvailableCopies(bookDto.getAvailableCopies());
+        return bookRepository.save(book);
+    }
 }
