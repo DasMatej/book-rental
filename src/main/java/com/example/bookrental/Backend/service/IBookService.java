@@ -2,6 +2,7 @@ package com.example.bookrental.Backend.service;
 
 import com.example.bookrental.Backend.model.dto.BookDto;
 import com.example.bookrental.Backend.model.entity.Book;
+import com.example.bookrental.Backend.model.entity.Country;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface IBookService {
     void markBookAsTaken(Long id);
     Book addBook(BookDto book);
     List<Book> getBooksByAuthorId(Long id);
+    List<Book> getBooksByCountry(Country country);
 }

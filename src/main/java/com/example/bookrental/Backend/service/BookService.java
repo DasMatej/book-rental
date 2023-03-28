@@ -3,6 +3,7 @@ package com.example.bookrental.Backend.service;
 import com.example.bookrental.Backend.model.dto.BookDto;
 import com.example.bookrental.Backend.model.entity.Author;
 import com.example.bookrental.Backend.model.entity.Book;
+import com.example.bookrental.Backend.model.entity.Country;
 import com.example.bookrental.Backend.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,11 @@ public class BookService implements IBookService {
     @Override
     public List<Book> getBooksByAuthorId(Long id) {
         return bookRepository.findByAuthorId(id);
+    }
+
+    @Override
+    public List<Book> getBooksByCountry(Country country) {
+        return bookRepository.findByCountry(country);
     }
 
     private Book saveBook(BookDto bookDto, Book book) {

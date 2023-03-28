@@ -13,7 +13,6 @@ public class AuthorService implements IAuthorService {
     private final AuthorRepository authorRepository;
     private final ICountryService countryService;
 
-
     public AuthorService(AuthorRepository authorRepository, ICountryService countryService) {
         this.authorRepository = authorRepository;
         this.countryService = countryService;
@@ -37,6 +36,17 @@ public class AuthorService implements IAuthorService {
     @Override
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Author editAuthor(Long id, AuthorDto authorDto) {
+        Author author = authorRepository.findById(id).orElse(null);
+        if (author == null) { return null; }
+        return saveAuthor(authorDto, author);
+    }
+
+    public List<Author> getAuthorsByCountry(Country country) {
+        return authorRepository.findByCountry(country);
     }
 
     public Author saveAuthor(AuthorDto author, Author a) {

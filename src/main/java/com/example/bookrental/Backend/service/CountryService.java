@@ -1,8 +1,8 @@
 package com.example.bookrental.Backend.service;
 
+import com.example.bookrental.Backend.model.dto.CountryDto;
 import com.example.bookrental.Backend.model.entity.Country;
 import com.example.bookrental.Backend.repository.CountryRepository;
-import com.example.bookrental.Backend.service.ICountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,21 +18,32 @@ public class CountryService implements ICountryService {
 
     @Override
     public List<Country> getAllCountries() {
-        return null;
+        return countryRepository.findAll();
     }
 
     @Override
     public Country getCountryById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Country saveCountry(Country country) {
-        return null;
+        return countryRepository.findById(id).orElse(null);
     }
 
     @Override
     public void deleteCountry(Long id) {
+        countryRepository.deleteById(id);
+    }
+    @Override
+    public Country addCountry(CountryDto country) {
+        Country newCountry = new Country();
+        newCountry.setName(country.getName());
+        return countryRepository.save(newCountry);
+    }
 
+    @Override
+    public Country editCountry(Long id, CountryDto country) {
+        Country newCountry = countryRepository.findById(id).orElse(null);
+        if (newCountry == null) {
+            return null;
+        }
+        newCountry.setName(country.getName());
+        return countryRepository.save(newCountry);
     }
 }

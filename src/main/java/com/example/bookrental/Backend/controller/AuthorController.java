@@ -58,4 +58,13 @@ public class AuthorController {
             return ResponseEntity.ok(author);
         }
     }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Author> editAuthor(@PathVariable Long id, @RequestBody AuthorDto author) {
+        Author newAuthor = authorService.editAuthor(id, author);
+        if (newAuthor == null) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(newAuthor);
+        }
+    }
 }
