@@ -1,4 +1,4 @@
-package com.example.bookrental.Backend.model.entity;
+package com.example.bookrental.model.entity;
 
 import jakarta.persistence.*;
 
@@ -35,7 +35,6 @@ public class Author {
     public String getSurname() {
         return surname;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
@@ -43,7 +42,6 @@ public class Author {
     public Country getCountry() {
         return country;
     }
-
     public void setCountry(Country country) {
         this.country = country;
     }

@@ -1,8 +1,8 @@
-package com.example.bookrental.Backend.controller;
+package com.example.bookrental.controller;
 
-import com.example.bookrental.Backend.model.dto.BookDto;
-import com.example.bookrental.Backend.model.entity.Book;
-import com.example.bookrental.Backend.service.IBookService;
+import com.example.bookrental.model.dto.BookDto;
+import com.example.bookrental.model.entity.Book;
+import com.example.bookrental.service.IBookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/allBooks")
+    @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -54,7 +54,6 @@ public class BookController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<Book> editBook(@PathVariable Long id, @RequestBody BookDto book) {
         Book newBook = bookService.editBook(id, book);
-
         if (newBook == null) {
             return ResponseEntity.badRequest().build();
         } else {

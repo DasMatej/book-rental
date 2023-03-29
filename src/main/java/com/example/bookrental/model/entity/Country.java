@@ -1,4 +1,4 @@
-package com.example.bookrental.Backend.model.entity;
+package com.example.bookrental.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

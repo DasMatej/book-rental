@@ -1,4 +1,4 @@
-package com.example.bookrental.Backend.model.dto;
+package com.example.bookrental.model.dto;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package com.example.bookrental.Backend.service;
+package com.example.bookrental.service;
 
-import com.example.bookrental.Backend.model.dto.CountryDto;
-import com.example.bookrental.Backend.model.entity.Country;
-import com.example.bookrental.Backend.repository.CountryRepository;
+import com.example.bookrental.model.dto.CountryDto;
+import com.example.bookrental.model.entity.Country;
+import com.example.bookrental.repository.CountryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

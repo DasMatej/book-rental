@@ -1,6 +1,6 @@
-package com.example.bookrental.Backend.controller;
+package com.example.bookrental.controller;
 
-import com.example.bookrental.Backend.model.enums.BookCategory;
+import com.example.bookrental.model.enums.BookCategory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/api/categories")
 public class BookCategoryController {
-    @GetMapping("/allCategories")
+    @GetMapping("/all")
     public List<BookCategory> getAllCategories() {
         return Arrays.asList(BookCategory.values());
     }

@@ -1,8 +1,7 @@
-package com.example.bookrental.Backend.repository;
+package com.example.bookrental.repository;
 
-import com.example.bookrental.Backend.model.entity.Country;
+import com.example.bookrental.model.entity.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CountryRepository extends JpaRepository<Country, Long>{
-
 }

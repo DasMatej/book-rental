@@ -1,4 +1,4 @@
-package com.example.bookrental.Backend;
+package com.example.bookrental.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

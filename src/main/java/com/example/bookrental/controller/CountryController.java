@@ -1,12 +1,8 @@
-package com.example.bookrental.Backend.controller;
+package com.example.bookrental.controller;
 
-import com.example.bookrental.Backend.model.dto.CountryDto;
-import com.example.bookrental.Backend.model.entity.Author;
-import com.example.bookrental.Backend.model.entity.Book;
-import com.example.bookrental.Backend.model.entity.Country;
-import com.example.bookrental.Backend.service.IAuthorService;
-import com.example.bookrental.Backend.service.IBookService;
-import com.example.bookrental.Backend.service.ICountryService;
+import com.example.bookrental.model.dto.CountryDto;
+import com.example.bookrental.model.entity.Country;
+import com.example.bookrental.service.ICountryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +13,12 @@ import java.util.List;
 public class CountryController {
 
     private final ICountryService countryService;
-    private final IAuthorService authorService;
-    private final IBookService bookService;
 
-    public CountryController(ICountryService countryService, IAuthorService authorService, IBookService bookService) {
+    public CountryController(ICountryService countryService) {
         this.countryService = countryService;
-        this.authorService = authorService;
-        this.bookService = bookService;
     }
 
-    @GetMapping("/allCountries")
+    @GetMapping("/all")
     public List<Country> getAllCountries() {
         return countryService.getAllCountries();
     }
@@ -63,20 +55,10 @@ public class CountryController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Country> deleteCountry(@PathVariable Long id) {
         Country country = countryService.getCountryById(id);
+
         if (country == null) {
             return ResponseEntity.notFound().build();
         } else {
-
-            List<Author> authors = authorService.getAuthorsByCountry(country);
-            for (Author author : authors) {
-                authorService.deleteAuthor(author.getId());
-            }
-
-            List<Book> books = bookService.getBooksByCountry(country);
-            for (Book book : books) {
-                bookService.deleteBook(book.getId());
-            }
-
             countryService.deleteCountry(id);
             return ResponseEntity.ok().build();
         }

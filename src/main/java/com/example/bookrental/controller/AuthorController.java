@@ -1,28 +1,23 @@
-package com.example.bookrental.Backend.controller;
+package com.example.bookrental.controller;
 
-import com.example.bookrental.Backend.model.dto.AuthorDto;
-import com.example.bookrental.Backend.model.entity.Author;
-import com.example.bookrental.Backend.model.entity.Book;
-import com.example.bookrental.Backend.service.IAuthorService;
-import com.example.bookrental.Backend.service.IBookService;
+import com.example.bookrental.model.dto.AuthorDto;
+import com.example.bookrental.model.entity.Author;
+import com.example.bookrental.service.IAuthorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/author")
+@RequestMapping("/api/authors")
 public class AuthorController {
     private final IAuthorService authorService;
-    private final IBookService bookService;
 
-
-    public AuthorController(IAuthorService authorService, IBookService bookService) {
+    public AuthorController(IAuthorService authorService) {
         this.authorService = authorService;
-        this.bookService = bookService;
     }
 
-    @GetMapping("/allAuthors")
+    @GetMapping("/all")
     public List<Author> getAllAuthors() {
         return authorService.getAllAuthors();
     }
@@ -50,10 +45,6 @@ public class AuthorController {
         if (author == null) {
             return ResponseEntity.notFound().build();
         } else {
-            List<Book> books = bookService.getBooksByAuthorId(id);
-            for (Book book : books) {
-                bookService.deleteBook(book.getId());
-            }
             authorService.deleteAuthor(id);
             return ResponseEntity.ok(author);
         }

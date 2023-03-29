@@ -1,6 +1,6 @@
-package com.example.bookrental.Backend.model.dto;
+package com.example.bookrental.model.dto;
 
-import com.example.bookrental.Backend.model.enums.BookCategory;
+import com.example.bookrental.model.enums.BookCategory;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package com.example.bookrental.Backend.model.enums;
+package com.example.bookrental.model.enums;
 
 public enum BookCategory {
     NOVEL,

@@ -1,9 +1,9 @@
-package com.example.bookrental.Backend.service;
+package com.example.bookrental.service;
 
-import com.example.bookrental.Backend.model.dto.AuthorDto;
-import com.example.bookrental.Backend.model.entity.Author;
-import com.example.bookrental.Backend.model.entity.Country;
-import com.example.bookrental.Backend.repository.AuthorRepository;
+import com.example.bookrental.model.dto.AuthorDto;
+import com.example.bookrental.model.entity.Author;
+import com.example.bookrental.model.entity.Country;
+import com.example.bookrental.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,10 +43,6 @@ public class AuthorService implements IAuthorService {
         Author author = authorRepository.findById(id).orElse(null);
         if (author == null) { return null; }
         return saveAuthor(authorDto, author);
-    }
-
-    public List<Author> getAuthorsByCountry(Country country) {
-        return authorRepository.findByCountry(country);
     }
 
     public Author saveAuthor(AuthorDto author, Author a) {

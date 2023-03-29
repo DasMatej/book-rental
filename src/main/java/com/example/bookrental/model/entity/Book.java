@@ -1,6 +1,6 @@
-package com.example.bookrental.Backend.model.entity;
+package com.example.bookrental.model.entity;
 
-import com.example.bookrental.Backend.model.enums.BookCategory;
+import com.example.bookrental.model.enums.BookCategory;
 import jakarta.persistence.*;
 
 @Entity
@@ -34,7 +34,6 @@ public class Book {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -42,15 +41,14 @@ public class Book {
     public BookCategory getCategory() {
         return category;
     }
-
     public void setCategory(BookCategory category) {
         this.category = category;
     }
 
+
     public Author getAuthor() {
         return author;
     }
-
     public void setAuthor(Author author) {
         this.author = author;
     }
