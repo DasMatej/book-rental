@@ -3,12 +3,14 @@ package com.example.bookrental.controller;
 import com.example.bookrental.model.dto.BookDto;
 import com.example.bookrental.model.entity.Book;
 import com.example.bookrental.service.IBookService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/books")
 public class BookController {
 
@@ -23,6 +25,10 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    @GetMapping("/all/page/{page}")
+    public List<Book> getAllBooksByPage(@PathVariable int page) {
+        return bookService.getAllBooksByPage(Pageable.ofSize(5).withPage(page));
+    }
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);

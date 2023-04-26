@@ -4,6 +4,7 @@ import com.example.bookrental.model.dto.BookDto;
 import com.example.bookrental.model.entity.Author;
 import com.example.bookrental.model.entity.Book;
 import com.example.bookrental.repository.BookRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,6 +59,11 @@ public class BookService implements IBookService {
     public Book addBook(BookDto book) {
         Book b = new Book();
         return saveBook(book, b);
+    }
+
+    @Override
+    public List<Book> getAllBooksByPage(Pageable withPage) {
+        return bookRepository.findAll(withPage).getContent();
     }
 
     private Book saveBook(BookDto bookDto, Book book) {
